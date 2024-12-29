@@ -66,6 +66,10 @@ func (receiver Values[T]) FirstElse(alternative T) T {
 	return value
 }
 
+func (receiver Values[T]) IsEmpty() bool {
+	return len(receiver.values) <= 0
+}
+
 // Last returns the last value in the list of values if it exists.
 func (receiver Values[T]) Last() (T, bool) {
 	var values []T = receiver.values
