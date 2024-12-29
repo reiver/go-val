@@ -19,6 +19,11 @@ type Values[T any] struct {
 	values []T
 }
 
+func NewValues[T any](values ...T) *Values[T] {
+	var result Values[T] = SomeValues(values...)
+	return &result
+}
+
 func SomeValues[T any](values ...T) Values[T] {
 	return Values[T]{
 		values:values,
