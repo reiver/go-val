@@ -41,6 +41,9 @@ func SomeValues[T any](values ...T) Values[T] {
 
 // All returns all the values as a slice.
 func (receiver Values[T]) All() []T {
+	if len(receiver.values) <= 0 {
+		return []T{}
+	}
 	return append([]T(nil), receiver.values...)
 }
 
