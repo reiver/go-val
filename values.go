@@ -88,6 +88,7 @@ func (receiver Values[T]) GoString() string {
 		var p []byte = buffer[0:0]
 
 		p = append(p, "val.SomeValues["...)
+		p = append(p, typeName...)
 		p = append(p, "]("...)
 		for index, value := range receiver.values {
 			if 0 < index {
@@ -95,7 +96,6 @@ func (receiver Values[T]) GoString() string {
 			}
 			p = append(p, fmt.Sprintf("%#v", value)...)
 		}
-		p = append(p, typeName...)
 		p = append(p, ')')
 
 		return string(p)
