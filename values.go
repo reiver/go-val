@@ -23,16 +23,19 @@ type Values[T any] struct {
 	values []T
 }
 
+// EmptyValues returns an empty val.Values[T]
 func EmptyValues[T any]() Values[T] {
 	return Values[T]{}
 }
 
 
+// NewValues returns a *val.Values[T] (potentially) with some values in it, given by the parameter 'values'.
 func NewValues[T any](values ...T) *Values[T] {
 	var result Values[T] = SomeValues(values...)
 	return &result
 }
 
+// SomeValues returns a val.Values[T] (potentially) with some values in it, given by the parameter 'values'.
 func SomeValues[T any](values ...T) Values[T] {
 	return Values[T]{
 		values:values,
