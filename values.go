@@ -1,5 +1,9 @@
 package val
 
+import (
+	"fmt"
+)
+
 // Values represents multiple values.
 //
 // Example usage:
@@ -69,6 +73,34 @@ func (receiver Values[T]) FirstElse(alternative T) T {
 	}
 
 	return value
+}
+
+func (receiver Values[T]) GoString() string {
+	var dummy T
+	var typeName string = fmt.Sprintf("%T", dummy)
+
+	if receiver.IsEmpty() {
+		return fmt.Sprintf("val.EmptyValues[%s]()", typeName)
+	}
+
+	{
+		var buffer [256]byte
+		var p []byte = buffer[0:0]
+
+		p = append(p, "val.SomeValues["...)
+		p = append(p, "]("...)
+		for index, value := range receiver.values {
+			if 0 < index {
+				p = append(p, ',')
+			}
+			p = append(p, fmt.Sprintf("%#v", value)...)
+		}
+		p = append(p, typeName...)
+		p = append(p, ')')
+
+		return string(p)
+	}
+
 }
 
 func (receiver Values[T]) IsEmpty() bool {
