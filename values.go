@@ -81,6 +81,20 @@ func (receiver Values[T]) FirstElse(alternative T) T {
 	return value
 }
 
+func (receiver Values[T]) For(fn func(T)) {
+	if nil == fn {
+		return
+	}
+
+	if receiver.IsEmpty() {
+		return
+	}
+
+	for _, value := range receiver.values {
+		fn(value)
+	}
+}
+
 func (receiver Values[T]) GoString() string {
 	var dummy T
 	var typeName string = fmt.Sprintf("%T", dummy)
